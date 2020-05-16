@@ -27,16 +27,16 @@ const { noop } = require('./util')
  * @type {number} */
 const PORT = 8000;
 
-const whitelist = ['http://localhost:4200', 'http://localhost:8080']
-const corsOptions = {
-    origin: function (origin, callback) {
-        if(whitelist.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    }
-}
+// const whitelist = ['http://localhost:4200', 'http://localhost:8080', 'http://localhost:8000']
+// const corsOptions = {
+//     origin: function (origin, callback) {
+//         if(whitelist.includes(origin)) {
+//             callback(null, true);
+//         } else {
+//             callback(new Error('Not allowed by CORS'));
+//         }
+//     }
+// }
 /**
  * create server
  */
@@ -44,7 +44,7 @@ function createApp() {
     /** The Express Application */
     const app = express();
     app.use(bodyParser.json());
-    app.use(cors(corsOptions));
+    // app.use(cors(corsOptions));
     /** The application server */
     const server = createServer(app);
     /** port the server application will listen to */
@@ -66,7 +66,15 @@ function createApp() {
     const lobbyIoService = new LobbyIoService(io, lobbyService, playerService, gameService);
     const playerIoService = new PlayerIoService(io, playerService);
     const gameIoService = new GameIoService(io, gameService);
-    
+
+    /** Static Client **/
+    app.use(express.static(__dirname + '/dist'));
+
+    app.get('/*', function(req,res) {
+
+    res.sendFile(path.join(__dirname+'/dist/index.html'));
+    });
+
     return app;
 }
 
