@@ -27,7 +27,7 @@ const { noop } = require('./util')
  * @type {number} */
 const PORT = 8000;
 
-// const whitelist = ['http://localhost:4200', 'http://localhost:8080', 'http://localhost:8000']
+// const whitelist = ['http://localhost:4200', 'http://localhost:8080', 'http://https://project-werewolf.herokuapp.com/']
 // const corsOptions = {
 //     origin: function (origin, callback) {
 //         if(whitelist.includes(origin)) {
