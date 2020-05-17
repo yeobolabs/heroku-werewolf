@@ -27,16 +27,20 @@ const { noop } = require('./util')
  * @type {number} */
 const PORT = 8000;
 
-// const whitelist = ['http://localhost:4200', 'http://localhost:8080', 'https://project-werewolf.herokuapp.com']
-// const corsOptions = {
-//     origin: function (origin, callback) {
-//         if(whitelist.includes(origin)) {
-//             callback(null, true);
-//         } else {
-//             callback(new Error('Not allowed by CORS'));
-//         }
-//     }
-// }
+const whitelist = [
+  'http://localhost:4200',
+  'http://localhost:8080',
+  'https://project-werewolf.herokuapp.com'
+];
+const corsOptions = {
+    origin: function (origin, callback) {
+        if(whitelist.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+}
 /**
  * create server
  */
