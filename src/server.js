@@ -8,6 +8,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const socketIo = require('socket.io');
+const path = require('path');
 const PlayerService = require('./services/player.service');
 const PlayerIoService = require('./services/io/player-io.service')
 const LobbyService = require('./services/lobby.service');
@@ -74,9 +75,8 @@ function createApp() {
     /** Static Client **/
     app.use(express.static(__dirname + '/dist'));
 
-    app.get('/*', function(req,res) {
-
-    res.sendFile(path.join(__dirname+'/dist/index.html'));
+    app.get('/**', function(req,res) {
+      res.sendFile(path.join(__dirname+'/dist/index.html'));
     });
 
     return app;
